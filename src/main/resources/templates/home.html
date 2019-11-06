@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--head部分-->
+<head th:include="layout :: htmlhead" th:with="title='wyait后台管理'">
+</head>
+<body class="layui-layout-body">
+    <div class="layui-layout layui-layout-admin">
+        <!--头-->
+        <div th:replace="fragments/head :: header"></div>
+        <!--主体区域-->
+        <!-- <div class="layui-body" th:include="channel/channelImport :: authorize"></div> -->
+        <!--<div th:include="channel/body :: body"></div>-->
+
+
+
+        <div class="layui-body">
+
+            <div id="test"></div>
+
+            <script>
+                layui.use('util', function(){
+                    var util = layui.util;
+
+                    //示例
+                    var endTime = new Date(2020,1,1).getTime() //假设为结束日期
+                        ,serverTime = new Date().getTime(); //假设为当前服务器时间，这里采用的是本地时间，实际使用一般是取服务端的
+
+                    util.countdown(endTime, serverTime, function(date, serverTime, timer){
+                        var str = date[0] + '天' + date[1] + '时' +  date[2] + '分' + date[3] + '秒';
+                        layui.$('#test').html('距离2020年1月1日还有：'+ str);
+                    });
+                });
+            </script>
+
+            <div class="layui-container">
+                <div class="layui-row">
+                    <div class="layui-col-xs9">
+                        &nbsp;
+                        <h1 style="padding-top:50px;line-height:2.0;"><shiro:principal property="username"></shiro:principal>，欢迎您登录
+                            <a href="http://blog.51cto.com/lanjy"><span style="font-weight: bold;font-size:28px;">后台管理系统</span></a></h1>
+                        <p><font style="font-size: 18px;">博客链接：</font><a href="http://blog.51cto.com/lanjy"><span style="font-weight: bold;font-size:20px;color:blue">http://blog.51cto.com/lanjy</span></a>
+                        </p>
+                        <p><font style="font-size: 18px;">layui框架官方示例：</font><a href="https://www.layui.com/demo/panel.html"><span style="font-weight: bold;font-size:20px;color:blue">https://www.layui.com/demo/panel.html</span></a>
+                        </p>
+                        <p>
+                            ajax异步请求异常：
+                            <a href="javascript:void(0)" onclick="ajaxError()">点击</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="/js/error.js"></script>
+        <!--底部-->
+        <div th:replace="fragments/footer :: footer"></div>
+    </div>
+</body>
+</html>
